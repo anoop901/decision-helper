@@ -5,9 +5,9 @@ import clsx from "clsx";
 
 const decisionOptionHeaderClasses =
   "rounded-xl bg-blue-400 border-blue-800 text-white font-bold p-2 text-center";
-const prosConsHeaderClasses =
-  "font-semibold text-center border-gray-300 p-2 rounded-md";
-const prosConsSectionClasses = "rounded-xl sm:px-8 flex flex-col gap-1";
+const prosConsHeaderClasses = "font-semibold text-center border-gray-300 p-2";
+const prosConsSectionClasses =
+  "rounded-xl sm:mx-8 flex flex-col gap-1 overflow-hidden";
 
 interface ProsCons {
   pros: string[];
@@ -32,9 +32,7 @@ function ProsConsList({
         {prosOrCons.map((proOrCon, index) => (
           <li
             key={index}
-            className={
-              "p-1 rounded-md hover:bg-gray-200 transition overflow-hidden"
-            }
+            className={"p-1 rounded-md transition overflow-hidden"}
           >
             <form
               onSubmit={(e) => {
@@ -45,7 +43,7 @@ function ProsConsList({
               <input
                 autoFocus
                 type="text"
-                className="p-1 w-full bg-transparent focus:bg-white"
+                className="p-1 w-full bg-transparent rounded-md hover:bg-white focus:bg-white transition"
                 value={proOrCon}
                 onChange={(e) => {
                   setProsOrCons(
@@ -67,7 +65,7 @@ function ProsConsList({
         ))}
       </ul>
       <button
-        className="rounded-md border-2 border-gray-300 bg-gray-100 px-2 py-1 self-center hover:bg-gray-200 transition"
+        className="rounded-md border-2 border-gray-300 bg-gray-100 px-2 py-1 self-center hover:bg-gray-200 transition m-1"
         onClick={() => {
           addNewProOrCon();
         }}
@@ -94,12 +92,12 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center space-y-5 py-5">
       <h1 className="text-3xl font-bold">Decision Helper</h1>
       <p>Use this tool to help you visualize your decision-making process.</p>
-      <div className="grid grid-cols-2 gap-4 w-full sm:w-5/6 max-w-3xl">
+      <div className="grid grid-cols-2 gap-4 w-full sm:w-5/6 max-w-3xl items-start">
         <h2 className={decisionOptionHeaderClasses}>Do it</h2>
 
         <h2 className={decisionOptionHeaderClasses}>Don&apos;t do it</h2>
-        <div className={prosConsSectionClasses}>
-          <h3 className={clsx(prosConsHeaderClasses, "bg-green-100")}>Pros</h3>
+        <div className={clsx(prosConsSectionClasses, "bg-green-100")}>
+          <h3 className={clsx(prosConsHeaderClasses, "bg-green-300")}>Pros</h3>
           <ProsConsList
             prosOrCons={info[0].pros}
             setProsOrCons={(newProsOrCons) =>
@@ -107,8 +105,8 @@ export default function Home() {
             }
           />
         </div>
-        <div className={prosConsSectionClasses}>
-          <h3 className={clsx(prosConsHeaderClasses, "bg-green-100")}>Pros</h3>
+        <div className={clsx(prosConsSectionClasses, "bg-green-100")}>
+          <h3 className={clsx(prosConsHeaderClasses, "bg-green-300")}>Pros</h3>
           <ProsConsList
             prosOrCons={info[1].pros}
             setProsOrCons={(newProsOrCons) =>
@@ -116,8 +114,8 @@ export default function Home() {
             }
           />
         </div>
-        <div className={prosConsSectionClasses}>
-          <h3 className={clsx(prosConsHeaderClasses, "bg-red-100")}>Cons</h3>
+        <div className={clsx(prosConsSectionClasses, "bg-red-100")}>
+          <h3 className={clsx(prosConsHeaderClasses, "bg-red-300")}>Cons</h3>
           <ProsConsList
             prosOrCons={info[0].cons}
             setProsOrCons={(newProsOrCons) =>
@@ -125,8 +123,8 @@ export default function Home() {
             }
           />
         </div>
-        <div className={prosConsSectionClasses}>
-          <h3 className={clsx(prosConsHeaderClasses, "bg-red-100")}>Cons</h3>
+        <div className={clsx(prosConsSectionClasses, "bg-red-100")}>
+          <h3 className={clsx(prosConsHeaderClasses, "bg-red-300")}>Cons</h3>
           <ProsConsList
             prosOrCons={info[1].cons}
             setProsOrCons={(newProsOrCons) =>
