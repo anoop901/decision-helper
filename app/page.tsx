@@ -94,6 +94,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center space-y-5 py-5">
       <h1 className="text-3xl font-bold">Decision Helper</h1>
+      <p>Use this tool to help you visualize your decision-making process.</p>
       <div className="grid grid-cols-2 gap-4 w-full sm:w-5/6 max-w-3xl">
         <h2 className={decisionOptionHeaderClasses}>Do it</h2>
 
