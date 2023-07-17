@@ -6,7 +6,7 @@ import clsx from "clsx";
 const decisionOptionHeaderClasses =
   "rounded-xl bg-blue-400 border-blue-800 text-white font-bold p-2 text-center";
 const prosConsHeaderClasses =
-  "font-semibold text-center bg-blue-100 border-gray-300 p-2 rounded-md";
+  "font-semibold text-center border-gray-300 p-2 rounded-md";
 const prosConsSectionClasses = "rounded-xl sm:px-8 flex flex-col gap-1";
 
 interface ProsCons {
@@ -48,7 +48,6 @@ function ProsConsList({
                 className="p-1 w-full bg-transparent focus:bg-white"
                 value={proOrCon}
                 onChange={(e) => {
-                  const newValue = e.currentTarget.value;
                   setProsOrCons(
                     update(prosOrCons, {
                       [index]: { $set: e.currentTarget.value },
@@ -100,7 +99,7 @@ export default function Home() {
 
         <h2 className={decisionOptionHeaderClasses}>Don&apos;t do it</h2>
         <div className={prosConsSectionClasses}>
-          <h3 className={prosConsHeaderClasses}>Pros</h3>
+          <h3 className={clsx(prosConsHeaderClasses, "bg-green-100")}>Pros</h3>
           <ProsConsList
             prosOrCons={info[0].pros}
             setProsOrCons={(newProsOrCons) =>
@@ -109,7 +108,7 @@ export default function Home() {
           />
         </div>
         <div className={prosConsSectionClasses}>
-          <h3 className={prosConsHeaderClasses}>Pros</h3>
+          <h3 className={clsx(prosConsHeaderClasses, "bg-green-100")}>Pros</h3>
           <ProsConsList
             prosOrCons={info[1].pros}
             setProsOrCons={(newProsOrCons) =>
@@ -118,7 +117,7 @@ export default function Home() {
           />
         </div>
         <div className={prosConsSectionClasses}>
-          <h3 className={prosConsHeaderClasses}>Cons</h3>
+          <h3 className={clsx(prosConsHeaderClasses, "bg-red-100")}>Cons</h3>
           <ProsConsList
             prosOrCons={info[0].cons}
             setProsOrCons={(newProsOrCons) =>
@@ -127,7 +126,7 @@ export default function Home() {
           />
         </div>
         <div className={prosConsSectionClasses}>
-          <h3 className={prosConsHeaderClasses}>Cons</h3>
+          <h3 className={clsx(prosConsHeaderClasses, "bg-red-100")}>Cons</h3>
           <ProsConsList
             prosOrCons={info[1].cons}
             setProsOrCons={(newProsOrCons) =>
