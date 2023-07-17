@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { MdAdd } from "react-icons/md";
 
 const decisionOptionHeaderClasses =
-  "border-b-4 border-b-blue-800 text-blue-800 font-bold p-2 text-center self-end";
+  "border-b-4 border-b-blue-800 text-blue-800 font-bold p-2 text-center self-end row-start-1";
 
 interface Option {
   pros: string[];
@@ -29,8 +29,8 @@ function ProsOrConsList({
   return (
     <div
       className={clsx("rounded-xl flex flex-col gap-1 overflow-hidden", {
-        "bg-green-100": sectionType === "pros",
-        "bg-red-100": sectionType === "cons",
+        "bg-green-100 row-start-2": sectionType === "pros",
+        "bg-red-100 row-start-3": sectionType === "cons",
       })}
     >
       <h3
@@ -111,8 +111,6 @@ export default function Home() {
       </p>
       <div className="grid grid-cols-2 gap-x-2 sm:gap-x-8 gap-y-2 w-full sm:w-5/6 max-w-3xl items-start">
         <h2 className={decisionOptionHeaderClasses}>Do it</h2>
-
-        <h2 className={decisionOptionHeaderClasses}>Don&apos;t do it</h2>
         <ProsOrConsList
           sectionType="pros"
           prosOrCons={decision[0].pros}
@@ -123,20 +121,22 @@ export default function Home() {
           }
         />
         <ProsOrConsList
-          sectionType="pros"
-          prosOrCons={decision[1].pros}
-          setProsOrCons={(newProsOrCons) =>
-            setDecision(
-              update(decision, { 1: { pros: { $set: newProsOrCons } } })
-            )
-          }
-        />
-        <ProsOrConsList
           sectionType="cons"
           prosOrCons={decision[0].cons}
           setProsOrCons={(newProsOrCons) =>
             setDecision(
               update(decision, { 0: { cons: { $set: newProsOrCons } } })
+            )
+          }
+        />
+
+        <h2 className={decisionOptionHeaderClasses}>Don&apos;t do it</h2>
+        <ProsOrConsList
+          sectionType="pros"
+          prosOrCons={decision[1].pros}
+          setProsOrCons={(newProsOrCons) =>
+            setDecision(
+              update(decision, { 1: { pros: { $set: newProsOrCons } } })
             )
           }
         />
