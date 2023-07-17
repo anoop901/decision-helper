@@ -6,8 +6,6 @@ import { MdAdd } from "react-icons/md";
 
 const decisionOptionHeaderClasses =
   "border-b-4 border-b-blue-800 text-blue-800 font-bold p-2 text-center self-end";
-const prosConsHeaderClasses = "font-semibold text-center border-gray-300 p-2";
-const prosConsSectionClasses = "rounded-xl flex flex-col gap-1 overflow-hidden";
 
 interface Option {
   pros: string[];
@@ -16,10 +14,12 @@ interface Option {
 
 type Decision = Option[];
 
-function ProsConsList({
+function ProsOrConsList({
+  sectionType,
   prosOrCons,
   setProsOrCons,
 }: {
+  sectionType: "pros" | "cons";
   prosOrCons: string[];
   setProsOrCons: (prosOrCons: string[]) => void;
 }) {
@@ -27,7 +27,21 @@ function ProsConsList({
     setProsOrCons(update(prosOrCons, { $push: [""] }));
   }
   return (
-    <>
+    <div
+      className={clsx("rounded-xl flex flex-col gap-1 overflow-hidden", {
+        "bg-green-100": sectionType === "pros",
+        "bg-red-100": sectionType === "cons",
+      })}
+    >
+      <h3
+        className={clsx("font-semibold text-center border-gray-300 p-2", {
+          "bg-green-300": sectionType === "pros",
+          "bg-red-300": sectionType === "cons",
+        })}
+      >
+        {sectionType === "pros" && "Pros"}
+        {sectionType === "cons" && "Cons"}
+      </h3>
       <ul className="flex flex-col gap-1">
         {prosOrCons.map((proOrCon, index) => (
           <li
@@ -73,7 +87,7 @@ function ProsConsList({
         <MdAdd />
         <span className="font-semibold">Add</span>
       </button>
-    </>
+    </div>
   );
 }
 
@@ -99,50 +113,42 @@ export default function Home() {
         <h2 className={decisionOptionHeaderClasses}>Do it</h2>
 
         <h2 className={decisionOptionHeaderClasses}>Don&apos;t do it</h2>
-        <div className={clsx(prosConsSectionClasses, "bg-green-100")}>
-          <h3 className={clsx(prosConsHeaderClasses, "bg-green-300")}>Pros</h3>
-          <ProsConsList
-            prosOrCons={decision[0].pros}
-            setProsOrCons={(newProsOrCons) =>
-              setDecision(
-                update(decision, { 0: { pros: { $set: newProsOrCons } } })
-              )
-            }
-          />
-        </div>
-        <div className={clsx(prosConsSectionClasses, "bg-green-100")}>
-          <h3 className={clsx(prosConsHeaderClasses, "bg-green-300")}>Pros</h3>
-          <ProsConsList
-            prosOrCons={decision[1].pros}
-            setProsOrCons={(newProsOrCons) =>
-              setDecision(
-                update(decision, { 1: { pros: { $set: newProsOrCons } } })
-              )
-            }
-          />
-        </div>
-        <div className={clsx(prosConsSectionClasses, "bg-red-100")}>
-          <h3 className={clsx(prosConsHeaderClasses, "bg-red-300")}>Cons</h3>
-          <ProsConsList
-            prosOrCons={decision[0].cons}
-            setProsOrCons={(newProsOrCons) =>
-              setDecision(
-                update(decision, { 0: { cons: { $set: newProsOrCons } } })
-              )
-            }
-          />
-        </div>
-        <div className={clsx(prosConsSectionClasses, "bg-red-100")}>
-          <h3 className={clsx(prosConsHeaderClasses, "bg-red-300")}>Cons</h3>
-          <ProsConsList
-            prosOrCons={decision[1].cons}
-            setProsOrCons={(newProsOrCons) =>
-              setDecision(
-                update(decision, { 1: { cons: { $set: newProsOrCons } } })
-              )
-            }
-          />
-        </div>
+        <ProsOrConsList
+          sectionType="pros"
+          prosOrCons={decision[0].pros}
+          setProsOrCons={(newProsOrCons) =>
+            setDecision(
+              update(decision, { 0: { pros: { $set: newProsOrCons } } })
+            )
+          }
+        />
+        <ProsOrConsList
+          sectionType="pros"
+          prosOrCons={decision[1].pros}
+          setProsOrCons={(newProsOrCons) =>
+            setDecision(
+              update(decision, { 1: { pros: { $set: newProsOrCons } } })
+            )
+          }
+        />
+        <ProsOrConsList
+          sectionType="cons"
+          prosOrCons={decision[0].cons}
+          setProsOrCons={(newProsOrCons) =>
+            setDecision(
+              update(decision, { 0: { cons: { $set: newProsOrCons } } })
+            )
+          }
+        />
+        <ProsOrConsList
+          sectionType="cons"
+          prosOrCons={decision[1].cons}
+          setProsOrCons={(newProsOrCons) =>
+            setDecision(
+              update(decision, { 1: { cons: { $set: newProsOrCons } } })
+            )
+          }
+        />
       </div>
     </main>
   );
