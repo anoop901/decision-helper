@@ -5,10 +5,9 @@ import clsx from "clsx";
 import { MdAdd } from "react-icons/md";
 
 const decisionOptionHeaderClasses =
-  "rounded-xl bg-blue-400 border-blue-800 text-white font-bold p-2 text-center";
+  "border-b-4 border-b-blue-800 text-blue-800 font-bold p-2 text-center self-end";
 const prosConsHeaderClasses = "font-semibold text-center border-gray-300 p-2";
-const prosConsSectionClasses =
-  "rounded-xl sm:mx-8 flex flex-col gap-1 overflow-hidden";
+const prosConsSectionClasses = "rounded-xl flex flex-col gap-1 overflow-hidden";
 
 interface ProsCons {
   pros: string[];
@@ -92,9 +91,11 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center space-y-5 py-5">
-      <h1 className="text-3xl font-bold">Decision Helper</h1>
-      <p>Use this tool to help you visualize your decision-making process.</p>
-      <div className="grid grid-cols-2 gap-4 w-full sm:w-5/6 max-w-3xl items-start">
+      <h1 className="text-3xl text-center font-bold">Decision Helper</h1>
+      <p className="text-center">
+        Use this tool to help you visualize your decision-making process.
+      </p>
+      <div className="grid grid-cols-2 gap-x-2 sm:gap-x-8 gap-y-2 w-full sm:w-5/6 max-w-3xl items-start">
         <h2 className={decisionOptionHeaderClasses}>Do it</h2>
 
         <h2 className={decisionOptionHeaderClasses}>Don&apos;t do it</h2>
