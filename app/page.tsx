@@ -2,6 +2,7 @@
 import { useState } from "react";
 import update from "immutability-helper";
 import clsx from "clsx";
+import { MdAdd } from "react-icons/md";
 
 const decisionOptionHeaderClasses =
   "rounded-xl bg-blue-400 border-blue-800 text-white font-bold p-2 text-center";
@@ -65,12 +66,13 @@ function ProsConsList({
         ))}
       </ul>
       <button
-        className="rounded-md border-2 border-gray-300 bg-gray-100 px-2 py-1 self-center hover:bg-gray-200 transition m-1"
+        className="rounded-md border-2 border-gray-300 bg-gray-100 px-2 py-1 self-center hover:bg-gray-200 transition m-1 flex gap-1 items-center"
         onClick={() => {
           addNewProOrCon();
         }}
       >
-        + Add
+        <MdAdd />
+        <span className="font-semibold">Add</span>
       </button>
     </>
   );
