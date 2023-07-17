@@ -97,7 +97,7 @@ export default function Home() {
       <div className="grid grid-cols-2 gap-4 w-full sm:w-5/6 max-w-3xl">
         <h2 className={decisionOptionHeaderClasses}>Do it</h2>
 
-        <h2 className={decisionOptionHeaderClasses}>Don't do it</h2>
+        <h2 className={decisionOptionHeaderClasses}>Don&apos;t do it</h2>
         <div className={prosConsSectionClasses}>
           <h3 className={prosConsHeaderClasses}>Pros</h3>
           <ProsConsList
