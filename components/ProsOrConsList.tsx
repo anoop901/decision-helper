@@ -45,7 +45,13 @@ export default function ProsOrConsList({
               <input
                 autoFocus
                 type="text"
-                className="p-1 w-full bg-transparent rounded-md hover:bg-white focus:bg-white transition"
+                className={clsx(
+                  "p-1 w-full bg-transparent rounded-md focus:bg-white transition",
+                  {
+                    "hover:bg-green-50": sectionType === "pros",
+                    "hover:bg-red-50": sectionType === "cons",
+                  }
+                )}
                 value={proOrCon}
                 onChange={(e) => {
                   setProsOrCons(
