@@ -1,4 +1,5 @@
 export interface Option {
+  name: string;
   pros: string[];
   cons: string[];
 }

@@ -12,7 +12,7 @@ export default function OptionColumn({
   return (
     <>
       <h2 className="border-b-4 border-b-blue-800 text-blue-800 font-bold p-2 text-center self-end row-start-1">
-        Do it
+        {option.name}
       </h2>
       <ProsOrConsList
         sectionType="pros"

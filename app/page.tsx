@@ -7,10 +7,12 @@ import Decision from "@/model/decision";
 export default function Home() {
   const [decision, setDecision] = useState<Decision>([
     {
+      name: "Do it",
       pros: [],
       cons: [],
     },
     {
+      name: "Don't do it",
       pros: [],
       cons: [],
     },
