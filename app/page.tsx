@@ -1,17 +1,8 @@
 "use client";
 import { useState } from "react";
 import update from "immutability-helper";
-import ProsOrConsList from "@/components/ProsOrConsList";
-
-const decisionOptionHeaderClasses =
-  "border-b-4 border-b-blue-800 text-blue-800 font-bold p-2 text-center self-end row-start-1";
-
-interface Option {
-  pros: string[];
-  cons: string[];
-}
-
-type Decision = Option[];
+import OptionColumn from "@/components/OptionColumn";
+import Decision from "@/model/decision";
 
 export default function Home() {
   const [decision, setDecision] = useState<Decision>([
@@ -32,43 +23,16 @@ export default function Home() {
         Use this tool to help you visualize your decision-making process.
       </p>
       <div className="grid grid-cols-2 gap-x-2 sm:gap-x-8 gap-y-2 w-full sm:w-5/6 max-w-3xl items-start">
-        <h2 className={decisionOptionHeaderClasses}>Do it</h2>
-        <ProsOrConsList
-          sectionType="pros"
-          prosOrCons={decision[0].pros}
-          setProsOrCons={(newProsOrCons) =>
-            setDecision(
-              update(decision, { 0: { pros: { $set: newProsOrCons } } })
-            )
+        <OptionColumn
+          option={decision[0]}
+          setOption={(option) =>
+            setDecision(update(decision, { 0: { $set: option } }))
           }
         />
-        <ProsOrConsList
-          sectionType="cons"
-          prosOrCons={decision[0].cons}
-          setProsOrCons={(newProsOrCons) =>
-            setDecision(
-              update(decision, { 0: { cons: { $set: newProsOrCons } } })
-            )
-          }
-        />
-
-        <h2 className={decisionOptionHeaderClasses}>Don&apos;t do it</h2>
-        <ProsOrConsList
-          sectionType="pros"
-          prosOrCons={decision[1].pros}
-          setProsOrCons={(newProsOrCons) =>
-            setDecision(
-              update(decision, { 1: { pros: { $set: newProsOrCons } } })
-            )
-          }
-        />
-        <ProsOrConsList
-          sectionType="cons"
-          prosOrCons={decision[1].cons}
-          setProsOrCons={(newProsOrCons) =>
-            setDecision(
-              update(decision, { 1: { cons: { $set: newProsOrCons } } })
-            )
+        <OptionColumn
+          option={decision[1]}
+          setOption={(option) =>
+            setDecision(update(decision, { 1: { $set: option } }))
           }
         />
       </div>
