@@ -25,18 +25,15 @@ export default function Home() {
         Use this tool to help you visualize your decision-making process.
       </p>
       <div className="grid grid-cols-2 gap-x-2 sm:gap-x-8 gap-y-2 w-full sm:w-5/6 max-w-3xl items-start">
-        <OptionColumn
-          option={decision[0]}
-          setOption={(option) =>
-            setDecision(update(decision, { 0: { $set: option } }))
-          }
-        />
-        <OptionColumn
-          option={decision[1]}
-          setOption={(option) =>
-            setDecision(update(decision, { 1: { $set: option } }))
-          }
-        />
+        {decision.map((option, index) => (
+          <OptionColumn
+            key={index}
+            option={option}
+            setOption={(option) =>
+              setDecision(update(decision, { [index]: { $set: option } }))
+            }
+          />
+        ))}
       </div>
     </main>
   );
