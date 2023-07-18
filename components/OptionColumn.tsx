@@ -11,8 +11,16 @@ export default function OptionColumn({
 }) {
   return (
     <>
-      <h2 className="border-b-4 border-b-blue-800 text-blue-800 font-bold p-2 text-center self-end row-start-1">
-        {option.name}
+      <h2 className="border-b-4 border-b-blue-800 self-end row-start-1 flex flex-col">
+        <input
+          className="text-blue-800 font-bold p-1 text-center hover:bg-gray-100 rounded-md"
+          type="text"
+          value={option.name}
+          onChange={(e) => {
+            const newValue = e.currentTarget.value;
+            setOption(update(option, { name: { $set: newValue } }));
+          }}
+        />
       </h2>
       <ProsOrConsList
         sectionType="pros"
