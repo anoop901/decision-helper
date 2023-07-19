@@ -3,6 +3,7 @@ import { useState } from "react";
 import update from "immutability-helper";
 import OptionColumn from "@/components/OptionColumn";
 import Decision from "@/model/decision";
+import { BsPlusCircleFill } from "react-icons/bs";
 
 export default function Home() {
   const [decision, setDecision] = useState<Decision>([
@@ -24,7 +25,12 @@ export default function Home() {
       <p className="text-center">
         Use this tool to help you visualize your decision-making process.
       </p>
-      <div className="grid grid-cols-2 gap-x-2 sm:gap-x-8 gap-y-2 w-full sm:w-5/6 max-w-3xl items-start">
+      <div
+        className="max-w-full overflow-x-auto grid gap-x-8 gap-y-2 items-start"
+        style={{
+          gridTemplateColumns: `repeat(${decision.length}, 250px) auto`,
+        }}
+      >
         {decision.map((option, index) => (
           <OptionColumn
             key={index}
@@ -34,6 +40,24 @@ export default function Home() {
             }
           />
         ))}
+        <button
+          className="row-start-1 self-center flex gap-1 items-center p-2 rounded-full hover:bg-gray-300 transition"
+          onClick={() => {
+            setDecision(
+              update(decision, {
+                $push: [
+                  {
+                    name: `Option ${decision.length + 1}`,
+                    pros: [],
+                    cons: [],
+                  },
+                ],
+              })
+            );
+          }}
+        >
+          <BsPlusCircleFill className="text-blue-800" />
+        </button>
       </div>
     </main>
   );
