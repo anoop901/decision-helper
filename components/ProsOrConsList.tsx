@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import update from "immutability-helper";
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdClose } from "react-icons/md";
 
 export default function ProsOrConsList({
   sectionType,
@@ -13,6 +13,9 @@ export default function ProsOrConsList({
 }) {
   function addNewProOrCon() {
     setProsOrCons(update(prosOrCons, { $push: [""] }));
+  }
+  function deleteProOrCon(index: number) {
+    setProsOrCons(update(prosOrCons, { $splice: [[index, 1]] }));
   }
   return (
     <div
@@ -34,9 +37,10 @@ export default function ProsOrConsList({
         {prosOrCons.map((proOrCon, index) => (
           <li
             key={index}
-            className={"p-1 rounded-md transition overflow-hidden"}
+            className={"p-1 rounded-md transition overflow-hidden flex"}
           >
             <form
+              className="grow"
               onSubmit={(e) => {
                 addNewProOrCon();
                 e.preventDefault();
@@ -56,13 +60,19 @@ export default function ProsOrConsList({
                 }}
                 onBlur={() => {
                   if (prosOrCons[index] === "") {
-                    setProsOrCons(
-                      update(prosOrCons, { $splice: [[index, 1]] })
-                    );
+                    deleteProOrCon(index);
                   }
                 }}
               />
             </form>
+            <button
+              className="text-gray-500 p-2 rounded-full hover:bg-gray-500/20 transition"
+              onClick={() => {
+                deleteProOrCon(index);
+              }}
+            >
+              <MdClose />
+            </button>
           </li>
         ))}
       </ul>
