@@ -1,9 +1,40 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import update from "immutability-helper";
 import OptionColumn from "@/components/OptionColumn";
 import Decision from "@/model/decision";
 import { BsPlusCircleFill } from "react-icons/bs";
+
+function getDecisionFromLocalStorage(): Decision | null {
+  const decisionStr = window?.localStorage?.getItem("decision-helper.decision");
+  if (decisionStr == null) {
+    return null;
+  }
+  const decision = JSON.parse(decisionStr);
+  if (!Array.isArray(decision)) {
+    return null;
+  }
+  for (const option of decision) {
+    if (
+      !(
+        "name" in option &&
+        typeof option.name === "string" &&
+        "pros" in option &&
+        Array.isArray(option.pros) &&
+        "cons" in option &&
+        Array.isArray(option.cons)
+      )
+    ) {
+      return null;
+    }
+    for (const proOrCon of [...option.pros, ...option.cons]) {
+      if (typeof proOrCon !== "string") {
+        return null;
+      }
+    }
+  }
+  return decision;
+}
 
 export default function Home() {
   const [decision, setDecision] = useState<Decision>([
@@ -18,6 +49,20 @@ export default function Home() {
       cons: [],
     },
   ]);
+
+  useEffect(() => {
+    const storedDecision = getDecisionFromLocalStorage();
+    if (storedDecision != null) {
+      setDecision(storedDecision);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      "decision-helper.decision",
+      JSON.stringify(decision)
+    );
+  }, [decision]);
 
   return (
     <main className="flex min-h-screen flex-col items-center space-y-5 py-5">
