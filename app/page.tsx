@@ -38,6 +38,10 @@ export default function Home() {
             setOption={(option) =>
               setDecision(update(decision, { [index]: { $set: option } }))
             }
+            removeOption={() => {
+              setDecision(update(decision, { $splice: [[index, 1]] }));
+            }}
+            showRemoveButton={decision.length > 1}
           />
         ))}
         <button
