@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import update from "immutability-helper";
 import { MdAdd, MdClose } from "react-icons/md";
+import TextareaAutosize from "@mui/base/TextareaAutosize";
 
 export default function ProsOrConsList({
   sectionType,
@@ -37,7 +38,9 @@ export default function ProsOrConsList({
         {prosOrCons.map((proOrCon, index) => (
           <li
             key={index}
-            className={"p-1 rounded-md transition overflow-hidden flex"}
+            className={
+              "p-1 rounded-md transition overflow-hidden flex items-center"
+            }
           >
             <form
               className="grow"
@@ -46,10 +49,9 @@ export default function ProsOrConsList({
                 e.preventDefault();
               }}
             >
-              <input
+              <TextareaAutosize
                 autoFocus
-                type="text"
-                className="p-1 w-full bg-transparent rounded-md focus:bg-white transition hover:bg-gray-500/20"
+                className="p-1 w-full bg-transparent rounded-md focus:bg-white transition hover:bg-gray-500/20 resize-none"
                 value={proOrCon}
                 onChange={(e) => {
                   setProsOrCons(

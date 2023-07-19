@@ -2,6 +2,7 @@ import update from "immutability-helper";
 import { Option } from "@/model/decision";
 import ProsOrConsList from "./ProsOrConsList";
 import { MdClose } from "react-icons/md";
+import { TextareaAutosize } from "@mui/base";
 
 export default function OptionColumn({
   option,
@@ -16,10 +17,9 @@ export default function OptionColumn({
 }) {
   return (
     <>
-      <h2 className="border-b-4 border-b-blue-800 self-end row-start-1 flex flex-row items-center">
-        <input
-          className="text-blue-800 font-bold p-1 text-center hover:bg-gray-500/20 transition rounded-md grow"
-          type="text"
+      <h2 className="border-b-4 border-b-blue-800 self-end row-start-1 flex items-center">
+        <TextareaAutosize
+          className="text-blue-800 font-bold p-1 text-center hover:bg-gray-500/20 transition rounded-md grow resize-none"
           value={option.name}
           onChange={(e) => {
             const newValue = e.currentTarget.value;
