@@ -45,7 +45,7 @@ export default function Home() {
           />
         ))}
         <button
-          className="row-start-1 self-center flex gap-1 items-center p-2 rounded-full hover:bg-gray-300 transition"
+          className="row-start-1 self-center flex gap-1 items-center p-2 rounded-full hover:bg-gray-500/20 transition"
           onClick={() => {
             setDecision(
               update(decision, {
